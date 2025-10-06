@@ -1,5 +1,7 @@
+from datetime import datetime
+
 from common.orm.base import Base
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, DATETIME
 
 
 class Repository(Base):
@@ -9,6 +11,10 @@ class Repository(Base):
 
     # id
     id = Column(Integer, name="id", primary_key=True, index=True)
+    created_at = Column(DATETIME, name="created_at", default=datetime.now)
+    created_by = Column(DATETIME, name="created_by", nullable=True)
+    updated_at = Column(DATETIME, name="updated_at", default=datetime.now)
+    updated_by = Column(DATETIME, name="updated_by", nullable=True)
 
     # Git 信息
     # 仓库 ID
@@ -30,7 +36,8 @@ class Repository(Base):
 
     def __repr__(self):
         return (
-            f"<Repository(id={self.id}, repo_id='{self.repo_id}, full_name='{self.full_name}, name='{self.name}"
+            f"<Repository(id={self.id}, created_at='{self.created_at}, created_by='{self.created_by}, updated_at='{self.updated_at}, updated_by='{self.updated_by}, "
+            f"repo_id='{self.repo_id}, full_name='{self.full_name}, name='{self.name}"
             f", default_branch='{self.default_branch}, enable_status='{self.enable_status}, delete_flag='{self.delete_flag}')>"
         )
 
@@ -38,6 +45,10 @@ class Repository(Base):
         """转换为字典"""
         return {
             "id": self.id,
+            "created_at": self.created_at,
+            "created_by": self.created_by,
+            "updated_at": self.updated_at,
+            "updated_by": self.updated_by,
             "repo_id": self.repo_id,
             "full_name": self.full_name,
             "name": self.name,

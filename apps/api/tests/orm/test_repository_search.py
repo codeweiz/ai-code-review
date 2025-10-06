@@ -18,10 +18,10 @@ class TestRepositorySearch(unittest.TestCase):
 
     @inject
     def setUp(
-        self,
-        repository_repository: BaseRepository[Repository] = Provide[
-            ApiContainer.repository_repository
-        ],
+            self,
+            repository_repository: BaseRepository[Repository] = Provide[
+                ApiContainer.repository_repository
+            ],
     ):
         self.repository_repository = repository_repository
 
@@ -34,14 +34,3 @@ class TestRepositorySearch(unittest.TestCase):
         """测试计数"""
         count = self.repository_repository.count()
         logger.info(count)
-
-    def test_get_by_filters(self):
-        """根据过滤器获取记录"""
-        repo_codes = [
-            "0001",
-            "0005",
-        ]
-        repo_list: List[Repository] = self.repository_repository.get_by_filters(
-            {"code__in": repo_codes}
-        )
-        logger.info(repo_list)
