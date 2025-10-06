@@ -127,3 +127,46 @@ CREATE TABLE `cs_pr_pull_request_review` (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci
   COMMENT='Pull Request Review 表（评审记录）';
+
+-- 删除旧表
+DROP TABLE IF EXISTS `cs_pr_issue`;
+
+-- 创建 Issue 表
+CREATE TABLE `cs_pr_issue` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY COMMENT '主键ID',
+
+    -- 审计字段
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `created_by` VARCHAR(255) NULL COMMENT '创建人',
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `updated_by` VARCHAR(255) NULL COMMENT '更新人',
+
+    -- 关联信息
+    `pull_request_review_id` INT NOT NULL COMMENT '关联的 Pull Request Review ID',
+
+    -- 来源与规则
+    `source` VARCHAR(50) NOT NULL COMMENT '问题来源：semgrep、llm、eslint、sonarqube 等',
+    `rule_id` VARCHAR(255) NULL COMMENT '静态检查规则 ID',
+    `type` VARCHAR(50) NULL COMMENT '问题类型：security、design、quality、practice、performance、bug',
+    `severity` VARCHAR(20) NULL COMMENT '严重程度：critical、high、medium、low',
+    `category` VARCHAR(100) NULL COMMENT '分类：如 sql_injection、null_pointer',
+
+    -- 问题描述信息
+    `title` TEXT NOT NULL COMMENT '问题标题',
+    `description` TEXT NULL COMMENT '详细描述',
+    `impact` TEXT NULL COMMENT '影响说明',
+    `suggestion` TEXT NULL COMMENT '修复建议',
+
+    -- 状态信息
+    `status` VARCHAR(50) NOT NULL DEFAULT 'active' COMMENT '状态：active、fixed、exempted、ignored',
+
+    -- 索引
+    INDEX `idx_cs_pr_issue_id` (`id`),
+    INDEX `idx_cs_pr_issue_review` (`pull_request_review_id`),
+    INDEX `idx_cs_pr_issue_source` (`source`),
+    INDEX `idx_cs_pr_issue_status` (`status`),
+    INDEX `idx_cs_pr_issue_type` (`type`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci
+  COMMENT='Issue 表（代码问题记录）';
