@@ -2,8 +2,8 @@ import unittest
 
 from api.constant.platform import PLATFORM_GITHUB
 from api.constant.rest import REST_METHOD_GET
-from api.platform.factory import get_git_platform
 from api.platform.base import GitPlatformRequest
+from api.platform.factory import get_git_platform
 from common.config import logger
 
 

@@ -1,9 +1,8 @@
-from dependency_injector import containers, providers
-
 from common.ai.llm.llm_client import LLMClient
 from common.orm.session_factory import DatabaseSessionFactory
 from common.redis.redis_client import RedisClient
 from common.util.thread_pool_service import ThreadPoolService
+from dependency_injector import containers, providers
 
 
 class CommonContainer(containers.DeclarativeContainer):

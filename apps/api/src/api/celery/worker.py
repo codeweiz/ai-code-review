@@ -14,10 +14,7 @@ def init_worker(**kwargs):
 
 # 初始化 DI 容器
 container = ApiContainer()
-container.wire(
-    modules=[
-    ]
-)
+container.wire(modules=[])
 
 
 # 预热 IOC 单例

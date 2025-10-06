@@ -24,12 +24,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 # 初始化 DI 容器
 container = ApiContainer()
-container.wire(
-    modules=[
-        db_content,
-        webhook
-    ]
-)
+container.wire(modules=[db_content, webhook])
 
 
 # 预热 IOC 单例

@@ -4,6 +4,9 @@ from pydantic import BaseModel, Field
 
 from .base import TOML_CONFIG
 from .db_config import DataSourceDictConfig
+from .gitea_config import GiteaConfig
+from .gitee_config import GiteeConfig
+from .github_config import GithubConfig
 from .langsmith_config import LangSmithConfig
 from .llm_config import LLMConfig
 from .redis_config import RedisConfig
@@ -22,6 +25,11 @@ class AppConfig(BaseModel):
         description="SQL数据源配置",
     )
     redis: RedisConfig = Field(default_factory=RedisConfig, description="Redis 配置")
+    gitea: GiteaConfig = Field(default_factory=GiteaConfig, description="Gitea 配置")
+    gitee: GiteeConfig = Field(default_factory=GiteeConfig, description="Gitee 配置")
+    github: GithubConfig = Field(
+        default_factory=GithubConfig, description="Github 配置"
+    )
     langsmith: LangSmithConfig = Field(
         default_factory=LangSmithConfig, description="LangGraph 调用追踪配置"
     )

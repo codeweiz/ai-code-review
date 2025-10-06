@@ -27,7 +27,7 @@ class GitPlatform(ABC):
         pass
 
     def _get_pr_info_request(
-            self, repo_name: str, pr_number: int
+        self, repo_name: str, pr_number: int
     ) -> GitPlatformRequest:
         """获取 Pull Request 基本信息的请求"""
 
@@ -42,7 +42,7 @@ class GitPlatform(ABC):
         pass
 
     def _get_pr_files_request(
-            self, repo_name: str, pr_number: int
+        self, repo_name: str, pr_number: int
     ) -> GitPlatformRequest:
         """获取 Pull Request 相关文件的请求"""
 
@@ -57,7 +57,7 @@ class GitPlatform(ABC):
         pass
 
     def _get_pr_commits_request(
-            self, repo_name: str, pr_number: int
+        self, repo_name: str, pr_number: int
     ) -> GitPlatformRequest:
         """获取 Pull Request 相关提交记录的请求"""
 
@@ -72,7 +72,7 @@ class GitPlatform(ABC):
         pass
 
     def _get_file_content_request(
-            self, repo_name: str, file_path: str, ref: str
+        self, repo_name: str, file_path: str, ref: str
     ) -> GitPlatformRequest:
         """获取文件内容的请求"""
 

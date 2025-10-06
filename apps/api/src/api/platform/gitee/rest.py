@@ -3,11 +3,10 @@ from typing import Any, Dict, List
 
 import requests
 from api.constant.platform import PLATFORM_GITEE
-from api.platform.base import GitPlatform
+from api.platform.base import GitPlatform, GitPlatformRequest
 from api.platform.factory import register_platform
 from api.platform.gitee.models import (CommitItem, FileContent, PullRequest,
                                        PullRequestFile, Webhook)
-from api.platform.base import GitPlatformRequest
 from common.config import appConfig
 from pydantic import BaseModel
 

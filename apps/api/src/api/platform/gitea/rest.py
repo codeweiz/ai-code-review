@@ -5,12 +5,13 @@ import requests
 from api.constant.platform import PLATFORM_GITEA
 from api.platform.base import GitPlatform, GitPlatformRequest
 from api.platform.factory import register_platform
-from api.platform.gitea.models import PullRequest, PullRequestFile, CommitItem, FileContent, Webhook
+from api.platform.gitea.models import (CommitItem, FileContent, PullRequest,
+                                       PullRequestFile, Webhook)
 from common.config import appConfig
 
 
 @register_platform(PLATFORM_GITEA)
-class GiteeGitPlatform(GitPlatform):
+class GiteaGitPlatform(GitPlatform):
     """Gitea 实现的代码仓库平台"""
 
     def __init__(self):
