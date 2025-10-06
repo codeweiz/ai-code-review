@@ -107,7 +107,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 @app.get("/", response_model=BaseResponse[str])
 async def root():
     return BaseResponse.success_response(
-        data="Content Vector Engine API", message="API服务正常运行"
+        data="AI CODE REVIEW API", message="API服务正常运行"
     )
 
 

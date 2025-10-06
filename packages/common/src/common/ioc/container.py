@@ -1,6 +1,7 @@
 from common.ai.llm.llm_client import LLMClient
 from common.orm.session_factory import DatabaseSessionFactory
 from common.redis.redis_client import RedisClient
+from common.semgrep.semgrep_client import SemgrepClient
 from common.util.thread_pool_service import ThreadPoolService
 from dependency_injector import containers, providers
 
@@ -16,6 +17,9 @@ class CommonContainer(containers.DeclarativeContainer):
 
     # Redis 客户端
     redis_client = providers.Singleton(RedisClient)
+
+    # Semgrep 客户端
+    semgrep_client = providers.Singleton(SemgrepClient)
 
     # 线程池服务
     thread_pool_service = providers.Singleton(ThreadPoolService)
