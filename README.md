@@ -1,5 +1,22 @@
 # AI CODE REVIEW AI 代码审查工具
 
+自动化 PR 代码质量审查工具，基于 LangChain + LangGraph + Deepseek LLM。
+
+## 功能特点
+
+- 监听 GitHub PR Webhook 事件
+- 自动拉取 PR 的 diff、commit 信息
+- 基于 LangChain + Deepseek LLM 进行代码质量分析
+- 自动将分析结果评论到 PR
+- 支持异步后台处理，主线程快速响应
+
+## 技术栈
+
+- **Web 框架**: FastAPI
+- **LLM 集成**: LangChain + LangGraph
+- **异步处理**: Celery + Redis
+- **GitHub 交互**: GitHub REST API
+
 ## 安装和设置
 
 ### 1. 安装 UV
