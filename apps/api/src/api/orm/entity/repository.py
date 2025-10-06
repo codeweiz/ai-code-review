@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from common.orm.base import Base
-from sqlalchemy import Boolean, Column, Integer, String, DATETIME
+from sqlalchemy import DATETIME, Boolean, Column, Integer, String
 
 
 class Repository(Base):

@@ -1,3 +1,4 @@
+from api.orm.entity.pull_request import PullRequest
 from api.orm.entity.repository import Repository
 from common.ioc.container import CommonContainer
 from common.orm.base_repository import BaseRepository
@@ -12,6 +13,13 @@ class ApiContainer(containers.DeclarativeContainer):
     repository_repository = providers.Factory(
         BaseRepository,
         model=Repository,
+        db_factory=common.container.db_session_factory,
+        datasource="master",
+    )
+
+    pull_request_repository = providers.Factory(
+        BaseRepository,
+        model=PullRequest,
         db_factory=common.container.db_session_factory,
         datasource="master",
     )
