@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "common"
+version = "0.1.0"
+description = "公共模块"
+authors = [
+    {name = "Zhou Wei", email = "zhouwei@chances.com.cn"}
+]
+requires-python = ">=3.11"
+dependencies = [
+    "langchain>=0.3.25",
+    "langchain-community>=0.3.25",
+    "langchain-core>=0.3.65",
+    "langchain-huggingface>=0.3.0",
+    "langchain-milvus>=0.2.0",
+    "langgraph>=0.4.8",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.9.1",
+    "pymilvus>=2.5.11",
+    "sentence-transformers>=4.1.0",
+    "toml>=0.10.2",
+    "rank-bm25>=0.2.2",
+    "sqlalchemy>=2.0.0",
+    "pymysql>=1.1.0",
+    "elasticsearch>=9.1.0",
+    "insightface>=0.7.3",
+    "onnxruntime>=1.22.1",
+    "langchain-openai>=0.3.32",
+    "redis>=5.0.0",
+    "celery>=5.5.3",
+    "dependency-injector>=4.48.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/common"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.2",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.9.1",
+    "isort>=5.12.0",
+    "ruff>=0.1.0",
+]

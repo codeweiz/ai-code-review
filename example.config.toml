@@ -1,0 +1,77 @@
+[llm]
+# LLM 提供商: openai, ollama
+provider = "ollama"
+# 模型名称：qwen-plus, deepseek-r1:32b
+model_name = "deepseek-r1:32b"
+# API 密钥
+api_key = ""
+# API Base URL：https://dashscope.aliyuncs.com/compatible-mode/v1, http://127.0.0.1:11434
+base_url = "http://127.0.0.1:11434"
+# 温度参数 (0.0-2.0)
+temperature = 0.7
+
+[embedding]
+# Embedding 提供商: huggingface
+provider = "huggingface"
+# 模型名称："BAAI/bge-large-zh-v1.5", "sentence-transformers/all-mpnet-base-v2", "nomic-ai/nomic-embed-text-v1", "BAAI/bge-m3"
+model_name = "BAAI/bge-m3"
+# 设备：mac 使用 mps，linux/win 使用 cuda 或 cpu
+device = "mps"
+
+[vector]
+# Milvus 服务地址
+uri = "http://localhost:19530"
+# Milvus 认证信息
+user = ""
+password = ""
+# Milvus 数据库名称
+db_name = "default"
+# Milvus 身份认证 Token
+token = ""
+# 连接或请求超时时间（秒）
+timeout = 30
+
+[[datasource]]
+# 数据源名称
+name = "your_datasource_name"
+# MySQL 数据库配置
+host = "127.0.0.1"
+port = 3306
+username = "root"
+password = "123456"
+database = "your_database_name"
+charset = "utf8mb4"
+# 连接池配置
+pool_size = 10
+max_overflow = 20
+pool_timeout = 30
+pool_recycle = 3600
+# 是否打印SQL语句
+echo = false
+
+[redis]
+# Redis 服务配置
+host = "localhost"
+port = 6379
+password = ""
+db = 0
+# 连接池配置
+max_connections = 10
+socket_timeout = 5
+socket_connect_timeout = 5
+
+[elasticsearch]
+# ES 地址
+url = "http://localhost:9200"
+# ES API Key
+api_key = ""
+# ES index name
+index_name = "your_index_name"
+
+[langsmith]
+# 是否开启 LangSmith Tracing
+tracing = false
+# LangSmith API Key
+api_key = "your_langsmith_api_key"
+# LangSmith Project
+project = "default"
