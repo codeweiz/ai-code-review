@@ -87,3 +87,43 @@ CREATE TABLE `cs_pr_pull_request` (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci
   COMMENT='Pull Request 表';
+
+-- 删除旧表
+DROP TABLE IF EXISTS `cs_pr_pull_request_review`;
+
+-- 创建表
+CREATE TABLE `cs_pr_pull_request_review` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY COMMENT '主键ID',
+
+    -- 审计字段
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `created_by` VARCHAR(255) NULL COMMENT '创建人',
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `updated_by` VARCHAR(255) NULL COMMENT '更新人',
+
+    -- 关联信息
+    `pull_request_id` INT NOT NULL COMMENT '关联的 Pull Request ID',
+    `review_number` INT NOT NULL DEFAULT 0 COMMENT '评审轮次编号（第几次评审）',
+    `git_commit_sha` VARCHAR(64) NOT NULL COMMENT '关联的提交哈希（Commit SHA）',
+
+    -- 评分信息
+    `total_score` INT NULL DEFAULT 0 COMMENT '总分',
+    `secure_score` INT NULL DEFAULT 0 COMMENT '安全评分',
+    `design_score` INT NULL DEFAULT 0 COMMENT '架构评分',
+    `quality_score` INT NULL DEFAULT 0 COMMENT '质量评分',
+    `practice_score` INT NULL DEFAULT 0 COMMENT '实践评分',
+    `performance_score` INT NULL DEFAULT 0 COMMENT '性能评分',
+
+    -- 状态信息
+    `status` VARCHAR(50) NOT NULL DEFAULT 'running' COMMENT '处理状态：running、completed、failed、canceled',
+    `error_message` TEXT NULL COMMENT '错误信息',
+
+    -- 索引
+    INDEX `idx_cs_pr_review_id` (`id`),
+    INDEX `idx_cs_pr_review_pull_request` (`pull_request_id`),
+    INDEX `idx_cs_pr_review_status` (`status`),
+    INDEX `idx_cs_pr_review_commit_sha` (`git_commit_sha`)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_general_ci
+  COMMENT='Pull Request Review 表（评审记录）';

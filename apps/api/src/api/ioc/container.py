@@ -1,3 +1,4 @@
+from api.orm.entity.pr_review import PrReview
 from api.orm.entity.pull_request import PullRequest
 from api.orm.entity.repository import Repository
 from common.ioc.container import CommonContainer
@@ -20,6 +21,13 @@ class ApiContainer(containers.DeclarativeContainer):
     pull_request_repository = providers.Factory(
         BaseRepository,
         model=PullRequest,
+        db_factory=common.container.db_session_factory,
+        datasource="master",
+    )
+
+    pull_request_review_repository = providers.Factory(
+        BaseRepository,
+        model=PrReview,
         db_factory=common.container.db_session_factory,
         datasource="master",
     )

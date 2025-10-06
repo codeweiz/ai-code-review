@@ -12,7 +12,7 @@ from fastapi.responses import JSONResponse
 
 from .ioc.container import ApiContainer
 from .routers import webhook
-from .routers.database import pull_request, repository
+from .routers.database import pull_request, pull_request_review, repository
 
 
 @asynccontextmanager
@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 # 初始化 DI 容器
 container = ApiContainer()
-container.wire(modules=[repository, pull_request, webhook])
+container.wire(modules=[repository, pull_request, pull_request_review, webhook])
 
 
 # 预热 IOC 单例
@@ -58,6 +58,11 @@ app.add_middleware(
 app.include_router(repository.router, prefix="/api/v1/db/repository", tags=["仓库 SQL"])
 app.include_router(
     pull_request.router, prefix="/api/v1/db/pull_request", tags=["Pull Request SQL"]
+)
+app.include_router(
+    pull_request_review.router,
+    prefix="/api/v1/db/pull_request_review",
+    tags=["Pull Request Review SQL"],
 )
 app.include_router(webhook.router, prefix="/api/v1/webhook", tags=["WebHook"])
 
