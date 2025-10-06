@@ -11,8 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from .ioc.container import ApiContainer
-from .routers import content as db_content
-from .routers import webhook
+from .routers import repository, webhook
 
 
 @asynccontextmanager
@@ -24,7 +23,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 # 初始化 DI 容器
 container = ApiContainer()
-container.wire(modules=[db_content, webhook])
+container.wire(modules=[repository, webhook])
 
 
 # 预热 IOC 单例
@@ -55,9 +54,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(
-    db_content.router, prefix="/api/v1/db/content", tags=["内容元数据SQL"]
-)
+app.include_router(repository.router, prefix="/api/v1/db/repository", tags=["仓库SQL"])
 app.include_router(webhook.router, prefix="/api/v1/webhook", tags=["回调"])
 
 
