@@ -4,7 +4,7 @@ from common.orm.base import Base
 from sqlalchemy import DATETIME, Column, Integer, String, Text
 
 
-class PrReview(Base):
+class PullRequestReview(Base):
     """Pull Request Review 表，一个 PR 可能被评审多次"""
 
     __tablename__ = "cs_pr_pull_request_review"

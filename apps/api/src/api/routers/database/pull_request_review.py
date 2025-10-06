@@ -1,7 +1,7 @@
 from typing import Any
 
 from api.ioc.container import ApiContainer
-from api.orm.entity.pr_review import PrReview
+from api.orm.entity.pull_request_review import PullRequestReview
 from common.config import logger
 from common.orm.base_repository import BaseRepository
 from common.rest.response import BaseResponse
@@ -14,7 +14,7 @@ router = APIRouter()
 @router.get("/")
 @inject
 def list_pull_request_review(
-    repo: BaseRepository[PrReview] = Depends(
+    repo: BaseRepository[PullRequestReview] = Depends(
         Provide[ApiContainer.pull_request_review_repository]
     ),
 ) -> BaseResponse[Any]:
