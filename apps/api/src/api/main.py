@@ -12,6 +12,7 @@ from fastapi.responses import JSONResponse
 
 from .ioc.container import ApiContainer
 from .routers import content as db_content
+from .routers import webhook
 
 
 @asynccontextmanager
@@ -26,6 +27,7 @@ container = ApiContainer()
 container.wire(
     modules=[
         db_content,
+        webhook
     ]
 )
 
@@ -61,6 +63,7 @@ app.add_middleware(
 app.include_router(
     db_content.router, prefix="/api/v1/db/content", tags=["内容元数据SQL"]
 )
+app.include_router(webhook.router, prefix="/api/v1/webhook", tags=["回调"])
 
 
 @app.exception_handler(APIException)

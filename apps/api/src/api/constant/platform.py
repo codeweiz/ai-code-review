@@ -1,0 +1,3 @@
+PLATFORM_GITHUB = "github"
+PLATFORM_GITEE = "gitee"
+PLATFORM_GITEA = "gitea"
